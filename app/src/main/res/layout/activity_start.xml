@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+                xmlns:tools = "http://schemas.android.com/tools"
+                android:layout_width = "match_parent"
+                android:layout_height = "match_parent"
+                tools:context = ".StartActivity">
+	
+	<LinearLayout android:layout_width = "match_parent"
+	              android:layout_height = "match_parent"
+	              android:orientation = "vertical">
+		<ImageView android:layout_width = "match_parent"
+		           android:layout_height = "match_parent"
+		           android:layout_weight = "1"
+		           android:src = "@mipmap/front_page" />
+		<LinearLayout android:layout_width = "match_parent"
+		              android:layout_height = "wrap_content"
+		              android:layout_alignParentBottom = "true"
+		              android:orientation = "horizontal">
+			<Button android:id = "@+id/homePage_signIn"
+			        android:layout_width = "wrap_content"
+			        android:layout_height = "wrap_content"
+			        android:layout_weight = "1"
+			        android:background = "@color/colorPrimary"
+			        android:text = "@string/frontPage_signIn"
+			        android:textColor = "@color/colorIcon" />
+			<Button android:id = "@+id/homePage_register"
+			        android:layout_width = "wrap_content"
+			        android:layout_height = "wrap_content"
+			        android:layout_weight = "1"
+			        android:background = "@color/colorPrimary"
+			        android:text = "@string/frontPage_register"
+			        android:textColor = "@color/colorIcon" />
+		</LinearLayout>
+	</LinearLayout>
+
+</RelativeLayout>

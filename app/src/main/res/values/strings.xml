@@ -1,0 +1,11 @@
+<resources>
+	<string name = "app_name">TV Comment System</string>
+	
+	<string name = "frontPage_signIn">Sign In</string>
+	<string name = "frontPage_register">Register</string>
+	
+	<string name = "userPage_phoneNumber">Phone Number</string>
+	<string name = "userPage_password">Password</string>
+	<string name = "userPage_signIn">Sign In Now</string>
+	<string name = "userPage_register">Register Now</string>
+</resources>
