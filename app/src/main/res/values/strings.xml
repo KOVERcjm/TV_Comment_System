@@ -8,4 +8,13 @@
 	<string name = "userPage_password">Password</string>
 	<string name = "userPage_signIn">Sign In Now</string>
 	<string name = "userPage_register">Register Now</string>
+	
+	<string name = "channelPage_title">Channel List</string>
+	<string name = "channelPage_jdylc">经典咏流传</string>
+	<string name = "channelPage_jql">金曲捞</string>
+	<string name = "channelPage_zqdn">最强大脑</string>
+	<string name = "channelPage_wsgs">我是歌手</string>
+	
+	<string name = "playerPage_hint">Press ENTER to send live comment.</string>
+	<string name = "playerPage_comment">Comment</string>
 </resources>

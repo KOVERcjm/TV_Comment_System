@@ -55,8 +55,7 @@ public class UserActivity extends AppCompatActivity
 			Matcher matcher = pattern.matcher(phoneNumber);
 			if (!matcher.matches())
 			{
-				Toast.makeText(UserActivity.this, "Invalid phone number format! Please input again!",
-						Toast.LENGTH_LONG).show();
+				Toast.makeText(UserActivity.this, "Invalid phone number format! Please input again!", Toast.LENGTH_LONG).show();
 				editText.setText("");
 				return;
 			}
@@ -75,6 +74,8 @@ public class UserActivity extends AppCompatActivity
 		private void signInProcess()
 		{
 			// TODO Sign in process.
+			Intent intent = new Intent(UserActivity.this, ChannelActivity.class);
+			startActivity(intent);
 		}
 		
 		private void registerProcess()
