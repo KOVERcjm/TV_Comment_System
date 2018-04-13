@@ -53,7 +53,7 @@ public class UserActivity extends AppCompatActivity
 			String regExp = "^((13[0-9])|(15[^4])|(18[0-9])|(17[0-8])|(147,145))\\d{8}$";
 			Pattern pattern = Pattern.compile(regExp);
 			Matcher matcher = pattern.matcher(phoneNumber);
-			if (!matcher.matches())
+			if (matcher.matches())
 			{
 				Toast.makeText(UserActivity.this, "Invalid phone number format! Please input again!", Toast.LENGTH_LONG).show();
 				editText.setText("");
