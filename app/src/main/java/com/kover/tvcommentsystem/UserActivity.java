@@ -14,6 +14,9 @@ import java.util.regex.Pattern;
 
 public class UserActivity extends AppCompatActivity
 {
+	/**
+	 * The action mode which user chose at the start page.
+	 */
 	String actionMode = "";
 	
 	@Override
@@ -23,13 +26,19 @@ public class UserActivity extends AppCompatActivity
 		setContentView(R.layout.activity_user);
 		
 		Intent intent = getIntent();
-		actionMode = intent.getStringExtra("homePageAction");
+		actionMode = intent.getStringExtra("startPageAction");
 		
+		/*
+		 * Set page for register.
+		 */
 		Button button = findViewById(R.id.userPage_action);
 		button.setOnClickListener(new buttonOnClickListener());
 		if ("register".equals(actionMode))
 			button.setText(R.string.userPage_register);
 		
+		/*
+		 * Set up the action bar and add a back button.
+		 */
 		android.support.v7.app.ActionBar actionBar = getSupportActionBar();
 		if (actionBar != null)
 		{
@@ -38,6 +47,9 @@ public class UserActivity extends AppCompatActivity
 		}
 	}
 	
+	/**
+	 * Button on click listener for the user logic.
+	 */
 	private class buttonOnClickListener implements View.OnClickListener
 	{
 		private String phoneNumber = "";
@@ -50,27 +62,42 @@ public class UserActivity extends AppCompatActivity
 			editText = findViewById(R.id.userPage_phoneNumber);
 			phoneNumber = editText.getText().toString();
 			
+			/*
+			 * Check for empty input.
+			 */
+			if ("".equals(phoneNumber) || "".equals(password))
+			{
+				Toast.makeText(UserActivity.this, "Please input both the phone number and the password!",
+						Toast.LENGTH_LONG).show();
+				return;
+			}
+			
+			/*
+			 * Check for the wrong phone format.
+			 */
 			String regExp = "^((13[0-9])|(15[^4])|(18[0-9])|(17[0-8])|(147,145))\\d{8}$";
 			Pattern pattern = Pattern.compile(regExp);
 			Matcher matcher = pattern.matcher(phoneNumber);
 			if (matcher.matches())
 			{
-				Toast.makeText(UserActivity.this, "Invalid phone number format! Please input again!", Toast.LENGTH_LONG).show();
+				Toast.makeText(UserActivity.this, "Invalid phone number format! Please input again!",
+						Toast.LENGTH_LONG).show();
 				editText.setText("");
 				return;
 			}
-			if ("".equals(password))
-			{
-				Toast.makeText(UserActivity.this, "Please input the password!", Toast.LENGTH_LONG).show();
-				return;
-			}
 			
+			/*
+			 * User logic.
+			 */
 			if ("signIn".equals(actionMode))
 				signInProcess();
 			else
 				registerProcess();
 		}
 		
+		/**
+		 * User sign in process.
+		 */
 		private void signInProcess()
 		{
 			// TODO Sign in process.
@@ -78,6 +105,9 @@ public class UserActivity extends AppCompatActivity
 			startActivity(intent);
 		}
 		
+		/**
+		 * User register process.
+		 */
 		private void registerProcess()
 		{
 			// TODO Register process.

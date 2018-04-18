@@ -1,7 +1,6 @@
 package com.kover.tvcommentsystem;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -62,19 +61,13 @@ public class PlayerActivity extends Activity
 			}
 			
 			@Override
-			public void updateTimer(DanmakuTimer timer)
-			{
-			}
+			public void updateTimer(DanmakuTimer timer)	{}
 			
 			@Override
-			public void danmakuShown(BaseDanmaku danmaku)
-			{
-			}
+			public void danmakuShown(BaseDanmaku danmaku) {}
 			
 			@Override
-			public void drawingFinished()
-			{
-			}
+			public void drawingFinished() {}
 		});
 		danmakuContext = DanmakuContext.create();
 		danmakuView.prepare(parser, danmakuContext);
@@ -112,11 +105,11 @@ public class PlayerActivity extends Activity
 		danmaku.text = content;
 		danmaku.padding = 5;
 		danmaku.textSize = sp2px(20);
-		danmaku.textColor = Color.WHITE;
+		danmaku.textColor = getColor(R.color.colorIcon);
 		danmaku.setTime(danmakuView.getCurrentTime());
 		if (withBorder)
 		{
-			danmaku.borderColor = Color.GREEN;
+			danmaku.borderColor = getColor(R.color.colorAccent);
 		}
 		danmakuView.addDanmaku(danmaku);
 	}

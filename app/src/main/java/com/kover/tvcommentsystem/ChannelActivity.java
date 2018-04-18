@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 public class ChannelActivity extends AppCompatActivity
@@ -17,18 +16,18 @@ public class ChannelActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_channel);
-		
-		ImageView imageView = findViewById(R.id.channelPage_channel1);
-		
-		imageView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v)
-			{
-				Intent intent = new Intent(ChannelActivity.this, PlayerActivity.class);
-				intent.putExtra("channel", "1");
-				startActivity(intent);
-			}
-		});
+//
+//		ImageView imageView = findViewById(R.id.channelPage_channel1);
+//
+//		imageView.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v)
+//			{
+//				Intent intent = new Intent(ChannelActivity.this, PlayerActivity.class);
+//				intent.putExtra("channel", "1");
+//				startActivity(intent);
+//			}
+//		});
 	}
 	
 	public void onClick(View view)
