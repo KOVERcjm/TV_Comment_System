@@ -1,6 +1,9 @@
 package com.kover.tvcommentsystem;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -17,7 +20,8 @@ public class UserActivity extends AppCompatActivity
 	/**
 	 * The action mode which user chose at the start page.
 	 */
-	String actionMode = "";
+	private String actionMode = "";
+	private Database database;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -78,7 +82,7 @@ public class UserActivity extends AppCompatActivity
 			String regExp = "^((13[0-9])|(15[^4])|(18[0-9])|(17[0-8])|(147,145))\\d{8}$";
 			Pattern pattern = Pattern.compile(regExp);
 			Matcher matcher = pattern.matcher(phoneNumber);
-			if (matcher.matches())
+			if (matcher.matches()) //TODO (!matcher.matches())
 			{
 				Toast.makeText(UserActivity.this, "Invalid phone number format! Please input again!",
 						Toast.LENGTH_LONG).show();
@@ -89,6 +93,7 @@ public class UserActivity extends AppCompatActivity
 			/*
 			 * User logic.
 			 */
+			database = new Database(view.getContext());
 			if ("signIn".equals(actionMode))
 				signInProcess();
 			else
@@ -100,9 +105,38 @@ public class UserActivity extends AppCompatActivity
 		 */
 		private void signInProcess()
 		{
-			// TODO Sign in process.
-			Intent intent = new Intent(UserActivity.this, ChannelActivity.class);
-			startActivity(intent);
+			SQLiteDatabase sqLiteDatabase = database.getWritableDatabase();
+			Cursor cursor = sqLiteDatabase.rawQuery("select * from user", null);
+			
+			while (cursor.moveToNext())
+			{
+				if (phoneNumber.equals(cursor.getString(1)))
+				{
+					if (password.equals(cursor.getString(2)))
+					{
+						Toast.makeText(UserActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
+						sqLiteDatabase.close();
+						Intent intent  = new Intent(UserActivity.this, ChannelActivity.class);
+						intent.putExtra("phone", phoneNumber);
+						startActivity(intent);
+						return;
+					}
+					else
+					{
+						Toast.makeText(UserActivity.this, "Invalid Password! Please input again!", Toast.LENGTH_SHORT).show();
+						EditText editText = findViewById(R.id.userPage_password);
+						editText.setText("");
+						return;
+					}
+				}
+			}
+			Toast.makeText(UserActivity.this, "This number has not been registered! Please input again!", Toast.LENGTH_LONG).show();
+			EditText editText = findViewById(R.id.userPage_password);
+			editText.setText("");
+			editText = findViewById(R.id.userPage_phoneNumber);
+			editText.setText("");
+			sqLiteDatabase.close();
+			return;
 		}
 		
 		/**
@@ -110,7 +144,31 @@ public class UserActivity extends AppCompatActivity
 		 */
 		private void registerProcess()
 		{
-			// TODO Register process.
+			SQLiteDatabase sqLiteDatabase = database.getWritableDatabase();
+			Cursor cursor = sqLiteDatabase.rawQuery("select * from user", null);
+			
+			while (cursor.moveToNext())
+			{
+				if (phoneNumber.equals(cursor.getString(1)))
+				{
+					Toast.makeText(UserActivity.this, "This number has been registered.", Toast.LENGTH_LONG).show();
+					EditText editText = findViewById(R.id.userPage_password);
+					editText.setText("");
+					editText = findViewById(R.id.userPage_phoneNumber);
+					editText.setText("");
+					return;
+				}
+			}
+			
+			ContentValues contentValues = new ContentValues();
+			contentValues.put("phone", phoneNumber);
+			contentValues.put("password", password);
+			sqLiteDatabase.insert("user", null, contentValues);
+			sqLiteDatabase.close();
+			
+			Toast.makeText(UserActivity.this, "Successful! Please sign in again!", Toast.LENGTH_LONG).show();
+			startActivity(new Intent(UserActivity.this, StartActivity.class));
+			return;
 		}
 	}
 	

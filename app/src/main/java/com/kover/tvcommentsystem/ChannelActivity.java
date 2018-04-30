@@ -16,18 +16,6 @@ public class ChannelActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_channel);
-//
-//		ImageView imageView = findViewById(R.id.channelPage_channel1);
-//
-//		imageView.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View v)
-//			{
-//				Intent intent = new Intent(ChannelActivity.this, PlayerActivity.class);
-//				intent.putExtra("channel", "1");
-//				startActivity(intent);
-//			}
-//		});
 	}
 	
 	public void onClick(View view)
@@ -36,18 +24,19 @@ public class ChannelActivity extends AppCompatActivity
 		switch (view.getId())
 		{
 			case R.id.channelPage_channel1:
-				intent.putExtra("channel", "1");
+				intent.putExtra("channel", 1);
 				break;
 			case R.id.channelPage_channel2:
-				intent.putExtra("channel", "2");
+				intent.putExtra("channel", 2);
 				break;
 			case R.id.channelPage_channel3:
-				intent.putExtra("channel", "3");
+				intent.putExtra("channel", 3);
 				break;
 			case R.id.channelPage_channel4:
-				intent.putExtra("channel", "4");
+				intent.putExtra("channel", 4);
 				break;
 		}
+		intent.putExtra("phone", getIntent().getStringExtra("phone"));
 		startActivity(intent);
 	}
 	

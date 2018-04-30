@@ -43,8 +43,25 @@ public class PlayerActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_player);
 		
+		Uri uri = null;
+		int channel = getIntent().getIntExtra("channel", 0);
+		switch (channel)
+		{
+			case 1:
+				uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.ysyt_jdylc);
+				break;
+			case 2:
+				uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.mgtv_wsgs);
+				break;
+			case 3:
+				uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.jsws_zqdn);
+				break;
+			case 4:
+				uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.jsws_jql);
+				break;
+		}
+		
 		VideoView videoView = findViewById(R.id.playerPage_videoView);
-		Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.mgtv_wsgs);
 		videoView.setVideoURI(uri);
 		videoView.start();
 		
@@ -86,7 +103,7 @@ public class PlayerActivity extends Activity
 				}
 				else
 				{
-					addDanmaku(comment, true);
+					addDanmaku(getIntent().getStringExtra("phone") + ": " + comment, true);
 					editText.setText("");
 				}
 			}
@@ -126,8 +143,8 @@ public class PlayerActivity extends Activity
 			{
 				while (showDanmaku)
 				{
-					int time = new Random().nextInt(3000);
-					String content = "2" + time + time;
+					int time = new Random().nextInt(10000);
+					String content = "" + time;
 					addDanmaku(content, false);
 					try
 					{
