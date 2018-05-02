@@ -10,6 +10,10 @@ import android.widget.Toast;
 
 public class StartActivity extends AppCompatActivity
 {
+	/**
+	 * Last recorded time of the click on the back key.
+	 * In the use of accomplishing the double-click-to-exit function.
+	 */
 	private long doubleClicktoExitTime = 0;
 	
 	@Override
@@ -18,7 +22,7 @@ public class StartActivity extends AppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start);
 		
-		/**
+		/*
 		 * Start up UserActivity with signIn mode.
 		 */
 		Button button = findViewById(R.id.homePage_signIn);
@@ -27,12 +31,12 @@ public class StartActivity extends AppCompatActivity
 			public void onClick(View v)
 			{
 				Intent intent = new Intent(StartActivity.this, UserActivity.class);
-				intent.putExtra("homePageAction", "signIn");
+				intent.putExtra("startPageAction", "signIn");
 				startActivity(intent);
 			}
 		});
 		
-		/**
+		/*
 		 * Start up UserActivity with register mode.
 		 */
 		button = findViewById(R.id.homePage_register);
@@ -41,17 +45,27 @@ public class StartActivity extends AppCompatActivity
 			public void onClick(View v)
 			{
 				Intent intent = new Intent(StartActivity.this, UserActivity.class);
-				intent.putExtra("homePageAction", "register");
+				intent.putExtra("startPageAction", "register");
 				startActivity(intent);
 			}
 		});
 	}
 	
+	/**
+	 * Intercept the onKeyDown event to accomplish the double-click-to-exit function.
+	 *
+	 * @param keyCode
+	 * @param event
+	 * @return
+	 */
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event)
 	{
 		if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN)
 		{
+			/*
+			 * Double click to Exit.
+			 */
 			if ((System.currentTimeMillis() - doubleClicktoExitTime) > 2000)
 			{
 				Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT).show();
